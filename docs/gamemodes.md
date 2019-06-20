@@ -28,7 +28,9 @@ From other games:
 * **MARATHON A1**: Tetris the Grand Master 1.
 * **MARATHON A2**: Tetris the Grand Master 2 (TAP Master).
 * **MARATHON A3**: Tetris the Grand Master 3 (no exams).
-* **MARATHON AX4**: Another mode from TGM Ace.
+* **MARATHON AX**: Normal mode from TGM Ace.
+* **MARATHON AX2**: Hi-Speed1 mode from TGM Ace.
+* **MARATHON AX3**: Hi-Speed2 mode from TGM Ace.
 * **MARATHON C89**: Nintendo NES Tetris. Can you transition and make it to the killscreen?
 
 
@@ -43,6 +45,8 @@ From other games:
 * **SURVIVAL A1**: 20G mode from Tetris the Grand Master.
 * **SURVIVAL A2**: T.A. Death.
 * **SURVIVAL A3**: Ti Shirase.
+* **SURVIVAL AX**: Another mode from TGM Ace.
+* **SURVIVAL AX2**: Another2 mode from TGM Ace.
 
 
 RACE
@@ -61,7 +65,6 @@ Modes where pieces turn invisible as soon as you lock them. One of Cambridge's s
 * **Phantom Mania**: The classic invisible mode from Nullpomino. Can you handle 999 levels of "the M roll"?
 
 * **Phantom Mania 2**: Phantom Mania but way faster! Can you face a mode where even the garbage and the next preview turn invisible?
-
 
 
 OTHER MODES

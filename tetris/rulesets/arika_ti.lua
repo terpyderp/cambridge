@@ -117,13 +117,12 @@ function ARS:attemptWallkicks(piece, new_piece, rot_dir, grid)
 			end
 		end
 	elseif piece.shape ~= "I" then
-			-- kick right, kick left
-			if (grid:canPlacePiece(new_piece:withOffset({x=1, y=0}))) then
-				piece:setRelativeRotation(rot_dir):setOffset({x=1, y=0})
-			elseif (grid:canPlacePiece(new_piece:withOffset({x=-1, y=0}))) then
-				piece:setRelativeRotation(rot_dir):setOffset({x=-1, y=0})
-			end
-		else
+		-- kick right, kick left
+		if (grid:canPlacePiece(new_piece:withOffset({x=1, y=0}))) then
+			piece:setRelativeRotation(rot_dir):setOffset({x=1, y=0})
+		elseif (grid:canPlacePiece(new_piece:withOffset({x=-1, y=0}))) then
+			piece:setRelativeRotation(rot_dir):setOffset({x=-1, y=0})
+		end
 	end
 
 end

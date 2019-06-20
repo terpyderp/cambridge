@@ -19,17 +19,22 @@ game_modes = {
 	require 'tetris.modes.marathon_a1',
 	require 'tetris.modes.marathon_a2',
 	require 'tetris.modes.marathon_a3',
-	require 'tetris.modes.marathon_ax4',
+	require 'tetris.modes.marathon_ax',
+	require 'tetris.modes.marathon_ax2',
+	require 'tetris.modes.marathon_ax3',
 	require 'tetris.modes.marathon_c89',
 	require 'tetris.modes.survival_a1',
 	require 'tetris.modes.survival_a2',
 	require 'tetris.modes.survival_a3',
+	require 'tetris.modes.survival_ax',
+	require 'tetris.modes.survival_ax2',
 }
 
 rulesets = {
 	require 'tetris.rulesets.cambridge',
 	require 'tetris.rulesets.arika',
 	require 'tetris.rulesets.arika_ti',
+	require 'tetris.rulesets.arika_ace',
 	require 'tetris.rulesets.standard_exp',
 	--require 'tetris.rulesets.bonkers',
 	--require 'tetris.rulesets.shirase',

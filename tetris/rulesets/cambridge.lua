@@ -398,6 +398,7 @@ function CRS:onPieceDrop(piece, grid)
 end
 
 function CRS:onPieceMove(piece, grid)
+	piece.lock_delay = 0 -- move reset
 	if piece:isDropBlocked(grid) then
 		piece.move_counter = piece.move_counter + 1
 		if piece.move_counter >= 24 then
@@ -407,6 +408,7 @@ function CRS:onPieceMove(piece, grid)
 end
 
 function CRS:onPieceRotate(piece, grid)
+	piece.lock_delay = 0 -- move reset
 	if piece:isDropBlocked(grid) then
 		piece.rotate_counter = piece.rotate_counter + 1
 		if piece.rotate_counter >= 12 then
@@ -414,7 +416,5 @@ function CRS:onPieceRotate(piece, grid)
 		end
 	end
 end
-
-function CRS:getDefaultOrientation() return 1 end  -- downward facing pieces by default
 
 return CRS

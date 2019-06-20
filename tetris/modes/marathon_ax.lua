@@ -5,20 +5,19 @@ local Piece = require 'tetris.components.piece'
 
 local History6RollsRandomizer = require 'tetris.randomizers.history_6rolls'
 
-local MarathonAX4Game = GameMode:extend()
+local MarathonAXGame = GameMode:extend()
 
-MarathonAX4Game.name = "Marathon AX4"
-MarathonAX4Game.hash = "MarathonAX4"
-MarathonAX4Game.tagline = "Can you clear the time hurdles when the game goes this fast?"
+MarathonAXGame.name = "Marathon AX"
+MarathonAXGame.hash = "MarathonAX"
+MarathonAXGame.tagline = "Can you clear the time hurdles when the game goes this fast?"
 
 
-function MarathonAX4Game:new()
-	MarathonAX4Game.super:new()
+function MarathonAXGame:new()
+	MarathonAXGame.super:new()
 
 	self.roll_frames = 0
 	self.randomizer = History6RollsRandomizer()
 
-	self.section_time_limit = 3600
 	self.section_start_time = 0
 	self.section_times = { [0] = 0 }
 	self.section_clear = false
@@ -28,52 +27,48 @@ function MarathonAX4Game:new()
 	self.next_queue_length = 3
 end
 
-function MarathonAX4Game:getARE()
-	    if self.lines < 10 then return 18
-	elseif self.lines < 40 then return 14
-	elseif self.lines < 60 then return 12
-	elseif self.lines < 70 then return 10
-	elseif self.lines < 80 then return 8
-	elseif self.lines < 90 then return 7
-	else return 6 end
+function MarathonAXGame:getSectionTimeLimit()
+	if self.lines < 20 then return 7200
+	else return 5400 end
 end
 
-function MarathonAX4Game:getLineARE()
+function MarathonAXGame:getARE()
+	return 27
+end
+
+function MarathonAXGame:getLineARE()
 	return self:getARE()
 end
 
-function MarathonAX4Game:getDasLimit()
-	    if self.lines < 20 then return 10
-	elseif self.lines < 50 then return 9
-	elseif self.lines < 70 then return 8
-	else return 7 end
+function MarathonAXGame:getDasLimit()
+	return 15
 end
 
-function MarathonAX4Game:getLineClearDelay()
-	    if self.lines < 10 then return 14
-	elseif self.lines < 30 then return 9
-	else return 5 end
+function MarathonAXGame:getLineClearDelay()
+	return 40
 end
 
-function MarathonAX4Game:getLockDelay()
-		if self.lines < 10 then return 28
-	elseif self.lines < 20 then return 24
-	elseif self.lines < 30 then return 22
-	elseif self.lines < 40 then return 20
-	elseif self.lines < 50 then return 18
-	elseif self.lines < 70 then return 14
-	else return 13 end
+function MarathonAXGame:getLockDelay()
+	return 30
 end
 
-function MarathonAX4Game:getGravity()
-	return 20
+function MarathonAXGame:getGravity()
+		if self.lines < 10 then return 4/256
+	elseif self.lines < 20 then return 12/256
+	elseif self.lines < 30 then return 48/256
+	elseif self.lines < 40 then return 72/256
+	elseif self.lines < 50 then return 96/256
+	elseif self.lines < 60 then return 1/2
+	elseif self.lines < 70 then return 1
+	elseif self.lines < 80 then return 3/2
+	elseif self.lines < 90 then return 2
+	elseif self.lines < 100 then return 3
+	elseif self.lines < 110 then return 4
+	elseif self.lines < 120 then return 5
+	else return 20 end
 end
 
-function MarathonAX4Game:getSection()
-	return math.floor(level / 100) + 1
-end
-
-function MarathonAX4Game:advanceOneFrame()
+function MarathonAXGame:advanceOneFrame()
 	if self.clear then
 		self.roll_frames = self.roll_frames + 1
 		if self.roll_frames < 0 then		
@@ -85,14 +80,14 @@ function MarathonAX4Game:advanceOneFrame()
 		if not self.section_clear then
 			self.frames = self.frames + 1
 		end
-		if self:getSectionTime() >= self.section_time_limit then
+		if self:getSectionTime() >= self:getSectionTimeLimit() then
 			self.game_over = true
 		end
 	end
 	return true
 end
 
-function MarathonAX4Game:onLineClear(cleared_row_count)
+function MarathonAXGame:onLineClear(cleared_row_count)
 	if not self.clear then
 		local new_lines = self.lines + cleared_row_count
 		self:updateSectionTimes(self.lines, new_lines)
@@ -104,11 +99,11 @@ function MarathonAX4Game:onLineClear(cleared_row_count)
 	end
 end
 
-function MarathonAX4Game:getSectionTime()
+function MarathonAXGame:getSectionTime()
 	return self.frames - self.section_start_time
 end
 
-function MarathonAX4Game:updateSectionTimes(old_lines, new_lines)
+function MarathonAXGame:updateSectionTimes(old_lines, new_lines)
 	if math.floor(old_lines / 10) < math.floor(new_lines / 10) then
 		-- record new section
 		table.insert(self.section_times, self:getSectionTime())
@@ -117,23 +112,23 @@ function MarathonAX4Game:updateSectionTimes(old_lines, new_lines)
 	end
 end
 
-function MarathonAX4Game:onPieceEnter()
+function MarathonAXGame:onPieceEnter()
 	self.section_clear = false
 end
 
-function MarathonAX4Game:drawGrid(ruleset)
+function MarathonAXGame:drawGrid(ruleset)
 	self.grid:draw()
 end
 
-function MarathonAX4Game:getHighscoreData()
+function MarathonAXGame:getHighscoreData()
 	return {
 		lines = self.lines,
 		frames = self.frames,
 	}
 end
 
-function MarathonAX4Game:drawScoringInfo()
-	MarathonAX4Game.super.drawScoringInfo(self)
+function MarathonAXGame:drawScoringInfo()
+	MarathonAXGame.super.drawScoringInfo(self)
 
 	love.graphics.setColor(1, 1, 1, 1)
 
@@ -155,7 +150,7 @@ function MarathonAX4Game:drawScoringInfo()
 	love.graphics.printf(self.clear and self.lines or self:getSectionEndLines(), 240, 370, 40, "right")
 
 	-- draw time left, flash red if necessary
-	local time_left = self.section_time_limit - math.max(self:getSectionTime(), 0)
+	local time_left = self:getSectionTimeLimit() - math.max(self:getSectionTime(), 0)
 	if not self.game_over and not self.clear and time_left < sp(0,10) and time_left % 4 < 2 then
 		love.graphics.setColor(1, 0.3, 0.3, 1)
 	end
@@ -163,12 +158,12 @@ function MarathonAX4Game:drawScoringInfo()
 	love.graphics.setColor(1, 1, 1, 1)
 end
 
-function MarathonAX4Game:getSectionEndLines()
+function MarathonAXGame:getSectionEndLines()
 	return math.floor(self.lines / 10 + 1) * 10
 end
 
-function MarathonAX4Game:getBackground()
+function MarathonAXGame:getBackground()
 	return math.floor(self.lines / 10)
 end
 
-return MarathonAX4Game
+return MarathonAXGame
