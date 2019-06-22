@@ -156,7 +156,7 @@ function PhantomMania2Game:onLineClear(cleared_row_count)
 		end
 		self:advanceBottomRow(-cleared_row_count)
 	else
-		self.roll_points = self.roll_points + cleared_row_points[cleared_row_count / 2]
+		self.roll_points = self.roll_points + cleared_row_points[cleared_row_count]
 		if self.roll_points >= 100 then
 			self.roll_points = self.roll_points - 100
 			self.grade = self.grade + 1
@@ -234,7 +234,7 @@ PhantomMania2Game.garbageOpacityFunction = function(age)
 end
 
 function PhantomMania2Game:drawGrid()
-	if not (self.game_over or (self.clear and self.level < 1300)) then
+	if not (self.game_over) then
 		self.grid:drawInvisible(self.rollOpacityFunction, self.garbageOpacityFunction)
 	else
 		self.grid:draw()

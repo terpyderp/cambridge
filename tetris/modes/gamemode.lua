@@ -152,6 +152,10 @@ function GameMode:update(inputs, ruleset)
 
 			local cleared_row_count = self.grid:getClearedRowCount()
 
+			if self.big_mode then
+				cleared_row_count = cleared_row_count / 2
+			end
+
 			self:onPieceLock(self.piece, cleared_row_count)
 			self:updateScore(self.level, self.drop_bonus, cleared_row_count)
 

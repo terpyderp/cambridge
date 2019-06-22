@@ -19,4 +19,4 @@ There are six rulesets currently supported:
 
 * ARS - the rotation system from the original Tetris the Grand Master.
 * Ti-ARS - ARS with floorkicks! From TGM3: Terror Instinct.
-* Ace-ARS - ARS with floorkicks and move reset!
+* Ace-ARS - ARS with floorkicks and move reset! From TGM ACE.
