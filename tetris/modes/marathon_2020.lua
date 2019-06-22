@@ -323,9 +323,9 @@ function Marathon2020Game:checkClear(level)
 end
 
 function Marathon2020Game:updateSectionTimes(old_level, new_level)
-	function sectionCool()
+	function sectionCool(section)
 		self.section_cool_count = self.section_cool_count + 1
-		self.delay_level = math.min(20, self.delay_level + 1)
+		if section < 10 then self.delay_level = math.min(20, self.delay_level + 1) end
 		table.insert(self.section_status, "cool")
 	end
 
@@ -343,7 +343,7 @@ function Marathon2020Game:updateSectionTimes(old_level, new_level)
 		table.insert(self.section_times, section_time)
 		self.section_start_time = self.frames
 
-		if section > 4 then self.delay_level = math.min(20, self.delay_level + 1) end
+		if section > 5 then self.delay_level = math.min(20, self.delay_level + 1) end
 		self:checkTorikan(section)
 		self:checkClear(new_level)
 
@@ -352,11 +352,11 @@ function Marathon2020Game:updateSectionTimes(old_level, new_level)
 			self.secondary_section_times[section] < self.secondary_section_times[section - 1] + 120 and
 			self.secondary_section_times[section] < cool_cutoffs[section]
 		) then
-			sectionCool()
+			sectionCool(section)
 		elseif self.section_status[section - 1] == "cool" then
 			table.insert(self.section_status, "none")
 		elseif section <= 19 and self.secondary_section_times[section] < cool_cutoffs[section] then
-			sectionCool()
+			sectionCool(section)
 		else
 			table.insert(self.section_status, "none")
 		end
@@ -417,6 +417,14 @@ function Marathon2020Game:drawGrid()
 	end
 end
 
+function Marathon2020Game:sectionColourFunction(section)
+	if self.section_status[section] == "cool" then
+		return { 0, 1, 0, 1 }
+	else
+		return { 1, 1, 1, 1 }
+	end
+end
+
 function Marathon2020Game:drawScoringInfo()
 	Marathon2020Game.super.drawScoringInfo(self)
 
@@ -428,7 +436,7 @@ function Marathon2020Game:drawScoringInfo()
 	love.graphics.printf("GRADE PTS.", text_x, 200, 90, "left")
 	love.graphics.printf("LEVEL", text_x, 320, 40, "left")
 
-	self:drawSectionTimesWithSecondary(current_section)
+	self:drawSectionTimesWithSecondary(current_section, self.sectionColourFunction)
 
 	love.graphics.setFont(font_3x5_3)
 	love.graphics.printf(self:getTotalGrade(), text_x, 120, 90, "left")

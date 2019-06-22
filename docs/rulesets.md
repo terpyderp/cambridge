@@ -10,16 +10,13 @@ A ruleset consists of the following things:
 
 If you're used to Nullpomino, you may notice a few things missing from that definition. For example, piece previews, hold queues, and randomizers have been moved to being game-specific rules, rather than rules that are changeable with the ruleset you use. Soft and hard drop behaviour is also game-specific now, so that times can be more plausibly compared across rulesets.
 
+There are six rulesets currently supported:
 
-Rotation system
----------------
-A rotation system defines the following things:
- * The block offsets of each piece orientation.
- * The wall or floor kicks that will be attempted for each type of rotation.
+* Cambridge - a ruleset original to Cambridge, used for all custom modes. Supports 180-degree rotations!
 
-There are four rotation systems currently supported:
+* SRS - the rotation system used in the Tetris Guideline games. Supports 180-degree rotations!
+* Ti-SRS - SRS but with no 180-degree rotations.
 
-* Cambridge
-* Classic ARS
-* Ti-ARS
-* SRS
+* ARS - the rotation system from the original Tetris the Grand Master.
+* Ti-ARS - ARS with floorkicks! From TGM3: Terror Instinct.
+* Ace-ARS - ARS with floorkicks and move reset!

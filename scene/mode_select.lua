@@ -32,10 +32,11 @@ game_modes = {
 
 rulesets = {
 	require 'tetris.rulesets.cambridge',
+	require 'tetris.rulesets.standard',
+	require 'tetris.rulesets.standard_ti',
 	require 'tetris.rulesets.arika',
 	require 'tetris.rulesets.arika_ti',
 	require 'tetris.rulesets.arika_ace',
-	require 'tetris.rulesets.standard_exp',
 	--require 'tetris.rulesets.bonkers',
 	--require 'tetris.rulesets.shirase',
 	--require 'tetris.rulesets.super302',

@@ -1,6 +1,6 @@
 require 'funcs'
 
-local MarathonAX2 = require 'tetris.modes.marathon_AX2'
+local MarathonAX2 = require 'tetris.modes.marathon_ax2'
 local Piece = require 'tetris.components.piece'
 
 local History6RollsRandomizer = require 'tetris.randomizers.history_6rolls'
