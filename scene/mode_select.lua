@@ -5,6 +5,8 @@ ModeSelectScene.title = "Game Start"
 current_mode = 1
 current_ruleset = 1
 
+MAX_MODES = 19
+
 game_modes = {
 	require 'tetris.modes.marathon_2020',
 	require 'tetris.modes.survival_2020',
@@ -53,38 +55,58 @@ end
 function ModeSelectScene:update()
 end
 
+function getCursorHeight(x)
+	return 78 + 20 * x
+end
+
+
+function ModeSelectScene:drawList(name, items, cursor, x)
+	local start, finish
+	if table.getn(items) < MAX_MODES then
+		start = 1
+		finish = table.getn(items)
+	else
+		if cursor < 10 then
+			start = 1
+			finish = 19
+		elseif cursor > table.getn(items) - 9 then
+			start = table.getn(items) - 18
+			finish = table.getn(items)
+		else
+			start = cursor - 9
+			finish = cursor + 9
+		end
+	end
+
+	if self.menu_state.select == name then
+		love.graphics.setColor(1, 1, 1, 0.5)
+	else
+		love.graphics.setColor(1, 1, 1, 0.25)
+	end
+	love.graphics.rectangle("fill", x, getCursorHeight(cursor - start), 240, 22)
+
+	love.graphics.setColor(1, 1, 1, 1)
+
+	for idx = start, finish do
+		local item = items[idx]
+		love.graphics.printf(item.name, x + 20, 80 + 20 * (idx - start), 200, "left")
+	end
+end
+
+
 function ModeSelectScene:render()
+	love.graphics.setFont(font_3x5_2)
+
 	love.graphics.draw(
 		backgrounds[0],
 		0, 0, 0,
 		0.5, 0.5
 	)
-	
-	if self.menu_state.select == "mode" then
-		love.graphics.setColor(1, 1, 1, 0.5)
-	elseif self.menu_state.select == "ruleset" then
-		love.graphics.setColor(1, 1, 1, 0.25)
-	end
-	love.graphics.rectangle("fill", 20, 78 + 20 * self.menu_state.mode, 240, 22)
 
-	if self.menu_state.select == "mode" then
-		love.graphics.setColor(1, 1, 1, 0.25)
-	elseif self.menu_state.select == "ruleset" then
-		love.graphics.setColor(1, 1, 1, 0.5)
-	end
-	love.graphics.rectangle("fill", 340, 78 + 20 * self.menu_state.ruleset, 200, 22)
-	
-	love.graphics.setColor(1, 1, 1, 1)
+	love.graphics.draw(misc_graphics["select_mode"], 20, 30)
 
-	love.graphics.draw(misc_graphics["select_mode"], 20, 40)
-
-	love.graphics.setFont(font_3x5_2)
-	for idx, mode in pairs(game_modes) do
-		love.graphics.printf(mode.name, 40, 80 + 20 * idx, 200, "left")
-	end
-	for idx, ruleset in pairs(rulesets) do
-		love.graphics.printf(ruleset.name, 360, 80 + 20 * idx, 160, "left")
-	end
+	self:drawList("mode", game_modes, self.menu_state.mode, 20)
+	self:drawList("ruleset", rulesets, self.menu_state.ruleset, 320)
 end
 
 function ModeSelectScene:onKeyPress(e)
