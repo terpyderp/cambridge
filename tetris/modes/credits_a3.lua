@@ -44,6 +44,7 @@ function CreditsA3Game:advanceOneFrame(inputs, ruleset)
 				self.roll_frames = 150
 			else
 				self.game_over = true
+				switchBGM(nil)
 			end
 		end
 	end
