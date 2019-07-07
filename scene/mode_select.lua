@@ -31,6 +31,7 @@ game_modes = {
 	require 'tetris.modes.survival_a3',
 	require 'tetris.modes.survival_ax',
 	require 'tetris.modes.survival_ax2',
+	require 'tetris.modes.credits_a3',
 }
 
 rulesets = {

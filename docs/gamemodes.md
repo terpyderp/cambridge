@@ -15,7 +15,9 @@ There are several classes of game modes. The modes that originate from other gam
 * The "G" series stand for "Guideline" games, or games that follow the Tetris Guideline.
     * GF - Tetris Friends (2007-2019)
     * GJ - Tetris Online Japan (2005-2011)
-* N stands for Nullpomino, only used for Phantom Mania N.
+* The "N" series stands for Nullpomino, only used for Phantom Mania N.
+* The "W" series stands for "Web" games, which are fanmade games released on the web.
+    * WCB - RainComplex.net's Cat Boi Quatro.
 
 MARATHON
 --------
@@ -23,6 +25,7 @@ MARATHON
 Modes in which the goal is to play as well as possible over a limited game interval.
 
 * **MARATHON 2020**: 2020 levels of pure pain. Can you make it all the way?
+* **MARATHON WCB**: CatBoiQuatro! Can you control the pieces?
 
 From other games:
 * **MARATHON A1**: Tetris the Grand Master 1.
@@ -55,6 +58,14 @@ RACE
 Modes with no levels, just a single timed goal.
 
 * **Race 40**: How fast can you clear 40 lines? No limits, no holds barred.
+
+
+CREDITS
+-------
+
+Modes that are just the credit rolls of specific games.
+
+* **CREDITS A3**: Tetris the Grand Master 3's famous M-roll.
 
 
 PHANTOM MANIA
