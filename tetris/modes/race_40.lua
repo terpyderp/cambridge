@@ -25,7 +25,7 @@ function Race40Game:new()
 	self.lock_drop = true
 	self.lock_hard_drop = true
 	self.instant_hard_drop = true
-	self.instant_soft_drop = false
+	self.instant_soft_drop = true
 	self.enable_hold = true
 	self.next_queue_length = 3
 end
@@ -39,11 +39,11 @@ function Race40Game:getARR()
 end
 
 function Race40Game:getARE()
-	return 0
+	return 4
 end
 
 function Race40Game:getLineARE()
-	return self:getARE()
+	return 2
 end
 
 function Race40Game:getDasLimit()
@@ -51,15 +51,15 @@ function Race40Game:getDasLimit()
 end
 
 function Race40Game:getLineClearDelay()
-	return 0
+	return 2
 end
 
 function Race40Game:getLockDelay()
-	return 15
+	return 30
 end
 
 function Race40Game:getGravity()
-	return 1/64
+	return 20
 end
 
 function Race40Game:advanceOneFrame()
