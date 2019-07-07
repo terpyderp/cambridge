@@ -131,7 +131,8 @@ function MarathonA1Game:onLineClear(cleared_row_count)
     self:checkGMRequirements(self.level, self.level + cleared_row_count)
 	if not self.clear then
 		local new_level = math.min(self.level + cleared_row_count, 999)
-		if self.level == 999 then
+		if new_level == 999 then
+			self.level = 999
 			self.clear = true
 		else
 			self.level = new_level
@@ -140,6 +141,7 @@ function MarathonA1Game:onLineClear(cleared_row_count)
 end
 
 function MarathonA1Game:updateScore(level, drop_bonus, cleared_lines)
+	if self.clear then return end
 	if cleared_lines > 0 then
 		self.combo = self.combo + (cleared_lines - 1) * 2
 		self.score = self.score + (
