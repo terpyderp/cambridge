@@ -1,26 +1,30 @@
+require "load.save"
+config = loadFromFile('config.sav')
+
 sounds = {
 	blocks = {
-		I = love.audio.newSource("res/se/piece_i.wav", "static"),
-		J = love.audio.newSource("res/se/piece_j.wav", "static"),
-		L = love.audio.newSource("res/se/piece_l.wav", "static"),
-		O = love.audio.newSource("res/se/piece_o.wav", "static"),
-		S = love.audio.newSource("res/se/piece_s.wav", "static"),
-		T = love.audio.newSource("res/se/piece_t.wav", "static"),
-		Z = love.audio.newSource("res/se/piece_z.wav", "static")
+		I = love.audio.newSource("res/se/".. config.sfxpack.lower() .."/piece_i.wav", "static"),
+		J = love.audio.newSource("res/se/".. config.sfxpack.lower() .."/piece_j.wav", "static"),
+		L = love.audio.newSource("res/se/".. config.sfxpack.lower() .."/piece_l.wav", "static"),
+		O = love.audio.newSource("res/se/".. config.sfxpack.lower() .."/piece_o.wav", "static"),
+		S = love.audio.newSource("res/se/".. config.sfxpack.lower() .."/piece_s.wav", "static"),
+		T = love.audio.newSource("res/se/".. config.sfxpack.lower() .."/piece_t.wav", "static"),
+		Z = love.audio.newSource("res/se/".. config.sfxpack.lower() .."/piece_z.wav", "static")
 	},
-	move = love.audio.newSource("res/se/move.wav", "static"),
-	bottom = love.audio.newSource("res/se/bottom.wav", "static"),
-	cursor = love.audio.newSource("res/se/cursor.wav", "static"),
-	cursor_lr = love.audio.newSource("res/se/cursor_lr.wav", "static"),
-	main_decide = love.audio.newSource("res/se/main_decide.wav", "static"),
-	mode_decide = love.audio.newSource("res/se/mode_decide.wav", "static"),
-	lock = love.audio.newSource("res/se/lock.wav", "static"),
-	hold = love.audio.newSource("res/se/hold.wav", "static"),
-	erase = love.audio.newSource("res/se/erase.wav", "static"),
-	fall = love.audio.newSource("res/se/fall.wav", "static"),
-	ready = love.audio.newSource("res/se/ready.wav", "static"),
-	go = love.audio.newSource("res/se/go.wav", "static"),
+	move = love.audio.newSource("res/se/".. config.sfxpack.lower() .."/move.wav", "static"),
+	bottom = love.audio.newSource("res/se/".. config.sfxpack.lower() .."/bottom.wav", "static"),
+	cursor = love.audio.newSource("res/se/".. config.sfxpack.lower() .."/cursor.wav", "static"),
+	cursor_lr = love.audio.newSource("res/se/".. config.sfxpack.lower() .."/cursor_lr.wav", "static"),
+	main_decide = love.audio.newSource("res/se/".. config.sfxpack.lower() .."/main_decide.wav", "static"),
+	mode_decide = love.audio.newSource("res/se/".. config.sfxpack.lower() .."/mode_decide.wav", "static"),
+	lock = love.audio.newSource("res/se/".. config.sfxpack.lower() .."/lock.wav", "static"),
+	hold = love.audio.newSource("res/se/".. config.sfxpack.lower() .."/hold.wav", "static"),
+	erase = love.audio.newSource("res/se/".. config.sfxpack.lower() .."/erase.wav", "static"),
+	fall = love.audio.newSource("res/se/".. config.sfxpack.lower() .."/fall.wav", "static"),
+	ready = love.audio.newSource("res/se/".. config.sfxpack.lower() .."/ready.wav", "static"),
+	go = love.audio.newSource("res/se/".. config.sfxpack.lower() .."/go.wav", "static"),
 }
+
 
 function playSE(sound, subsound)
 	if subsound == nil then

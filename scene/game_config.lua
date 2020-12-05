@@ -10,7 +10,8 @@ ConfigScene.options = {
 	{"piece_colour", "Piece Colours", {"Per ruleset","Arika"			 ,"TTC"}},
 	{"world_reverse","A Button Rotation", {"Left"				 ,"Auto"		,"Right"}},
 	{"das_last_key", "DAS Switch", {"Default", "Instant"}},
-	{"synchroes_allowed", "Synchroes", {"Per ruleset", "On", "Off"}}
+	{"synchroes_allowed", "Synchroes", {"Per ruleset", "On", "Off"}},
+	{"sfxpack", "Soundpack", {"Default", "TGM only", "Hailey"}},
 }
 local optioncount = #ConfigScene.options
 
@@ -18,7 +19,7 @@ function ConfigScene:new()
 	-- load current config
 	self.config = config.input
 	self.highlight = 1
-	
+
 	DiscordRPC:update({
 		details = "In menus",
 		state = "Changing game settings",
@@ -36,13 +37,13 @@ function ConfigScene:render()
 		0, 0, 0,
 		0.5, 0.5
 	)
-	
+
 	love.graphics.setFont(font_3x5_4)
 	love.graphics.print("GAME SETTINGS", 80, 40)
-	
+
 	love.graphics.setColor(1, 1, 1, 0.5)
 	love.graphics.rectangle("fill", 20, 98 + self.highlight * 20, 170, 22)
-	
+
 	love.graphics.setFont(font_3x5_2)
 	for i, option in ipairs(ConfigScene.options) do
 		love.graphics.setColor(1, 1, 1, 1)
