@@ -28,6 +28,7 @@ end
 
 function ConfigScene:update()
 	config["das_last_key"] = config.gamesettings.das_last_key == 2
+	-- reload the sounds when saving if the soundpack has changed or something
 end
 
 function ConfigScene:render()
