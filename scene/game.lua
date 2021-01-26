@@ -139,8 +139,19 @@ function GameScene:onInputRelease(e)
 end
 
 function submitHighscore(hash, data)
+	function isHighscore(score, high)
+		for k, _ in pairs(score) do
+			if not high[k] or score[k] > high[k] then
+				return true
+			end
+		end
+		return false
+	end
+	
 	if not highscores[hash] then highscores[hash] = {} end
-	table.insert(highscores[hash], data)
+	if isHighscore(data, highscores[hash]) then
+		highscores[hash] = data
+	end
 	saveHighscores()
 end
 

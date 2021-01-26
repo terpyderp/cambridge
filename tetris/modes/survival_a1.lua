@@ -66,24 +66,24 @@ function SurvivalA1Game:getGravity()
 end
 
 local function getRankForScore(score)
-		if score <	400 then return {rank = "9", next = 400}
-	elseif score <	800 then return {rank = "8", next = 800}
-	elseif score <   1400 then return {rank = "7", next = 1400}
-	elseif score <   2000 then return {rank = "6", next = 2000}
-	elseif score <   3500 then return {rank = "5", next = 3500}
-	elseif score <   5500 then return {rank = "4", next = 5500}
-	elseif score <   8000 then return {rank = "3", next = 8000}
-	elseif score <  12000 then return {rank = "2", next = 12000}
-	elseif score <  16000 then return {rank = "1", next = 16000}
-	elseif score <  22000 then return {rank = "S1", next = 22000}
-	elseif score <  30000 then return {rank = "S2", next = 30000}
-	elseif score <  40000 then return {rank = "S3", next = 40000}
-	elseif score <  52000 then return {rank = "S4", next = 52000}
-	elseif score <  66000 then return {rank = "S5", next = 66000}
-	elseif score <  82000 then return {rank = "S6", next = 82000}
-	elseif score < 100000 then return {rank = "S7", next = 100000}
-	elseif score < 120000 then return {rank = "S8", next = 120000}
-	else return {rank = "S9", next = "???"}
+		if score <	400 then return {rank = "9", next = 400, grade = 0}
+	elseif score <	800 then return {rank = "8", next = 800, grade = 1}
+	elseif score <   1400 then return {rank = "7", next = 1400, grade = 2}
+	elseif score <   2000 then return {rank = "6", next = 2000, grade = 3}
+	elseif score <   3500 then return {rank = "5", next = 3500, grade = 4}
+	elseif score <   5500 then return {rank = "4", next = 5500, grade = 5}
+	elseif score <   8000 then return {rank = "3", next = 8000, grade = 6}
+	elseif score <  12000 then return {rank = "2", next = 12000, grade = 7}
+	elseif score <  16000 then return {rank = "1", next = 16000, grade = 8}
+	elseif score <  22000 then return {rank = "S1", next = 22000, grade = 9}
+	elseif score <  30000 then return {rank = "S2", next = 30000, grade = 10}
+	elseif score <  40000 then return {rank = "S3", next = 40000, grade = 11}
+	elseif score <  52000 then return {rank = "S4", next = 52000, grade = 12}
+	elseif score <  66000 then return {rank = "S5", next = 66000, grade = 13}
+	elseif score <  82000 then return {rank = "S6", next = 82000, grade = 14}
+	elseif score < 100000 then return {rank = "S7", next = 100000, grade = 15}
+	elseif score < 120000 then return {rank = "S8", next = 120000, grade = 16}
+	else return {rank = "S9", next = "???", grade = 17}
 	end
 end
 
@@ -208,10 +208,15 @@ end
 
 function SurvivalA1Game:getHighscoreData()
 	return {
-		grade = self.grade,
+		grade = (
+			(self.gm_conditions["level300"] and
+			self.gm_conditions["level500"] and
+			self.gm_conditions["level999"]) and
+			18 or getRankForScore(self.score).grade
+		),
+		frames = self.frames,
 		score = self.score,
 		level = self.level,
-		frames = self.frames,
 	}
 end
 

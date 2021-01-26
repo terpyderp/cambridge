@@ -41,14 +41,14 @@ function ModeSelectScene:render()
 	elseif self.menu_state.select == "ruleset" then
 		love.graphics.setColor(1, 1, 1, 0.25)
 	end
-	love.graphics.rectangle("fill", 20, 258, 240, 22)
+	love.graphics.rectangle("fill", 20, 198, 240, 22)
 
 	if self.menu_state.select == "mode" then
 		love.graphics.setColor(1, 1, 1, 0.25)
 	elseif self.menu_state.select == "ruleset" then
 		love.graphics.setColor(1, 1, 1, 0.5)
 	end
-	love.graphics.rectangle("fill", 340, 258, 200, 22)
+	love.graphics.rectangle("fill", 340, 198, 200, 22)
 
 	love.graphics.setColor(1, 1, 1, 1)
 
@@ -56,13 +56,36 @@ function ModeSelectScene:render()
 
 	love.graphics.setFont(font_3x5_2)
 	for idx, mode in pairs(game_modes) do
-		if(idx >= self.menu_state.mode-9 and idx <= self.menu_state.mode+9) then
-			love.graphics.printf(mode.name, 40, (260 - 20*(self.menu_state.mode)) + 20 * idx, 200, "left")
+		if(idx >= self.menu_state.mode-6 and idx <= self.menu_state.mode+6) then
+			love.graphics.printf(mode.name, 40, (200 - 20*(self.menu_state.mode)) + 20 * idx, 200, "left")
 		end
 	end
 	for idx, ruleset in pairs(rulesets) do
-		if(idx >= self.menu_state.ruleset-9 and idx <= self.menu_state.ruleset+9) then
-			love.graphics.printf(ruleset.name, 360, (260 - 20*(self.menu_state.ruleset)) + 20 * idx, 160, "left")
+		if(idx >= self.menu_state.ruleset-6 and idx <= self.menu_state.ruleset+6) then
+			love.graphics.printf(ruleset.name, 360, (200 - 20*(self.menu_state.ruleset)) + 20 * idx, 160, "left")
+		end
+	end
+
+	-- mode description and highscore
+	for midx, mode in pairs(game_modes) do
+		for ridx, ruleset in pairs(rulesets) do
+			if (midx == self.menu_state.mode) and (ridx == self.menu_state.ruleset) then
+				love.graphics.printf(
+					"Mode Description:\n\n" .. mode.tagline, 20, 350, 200, "left"
+				)
+				love.graphics.printf(
+					ruleset.name .. " Highscore:", 240, 350, 200, "right"
+				)
+				local highscore_string = ""
+				if highscores[mode.hash .. "-" .. ruleset.hash] then
+					for k, v in ipairs(highscores[mode.hash .. "-" .. ruleset.hash]) do
+						highscore_string = highscore_string .. k .. ": " .. v .. "\n"
+					end
+				else
+					highscore_string = "You don't have any highscores yet!"
+				end
+				love.graphics.printf(highscore_string, 450, 350, 200, "left")
+			end
 		end
 	end
 end
