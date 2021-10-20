@@ -720,7 +720,7 @@ function GameMode:drawNextQueue(ruleset)
 		local skin = self.next_queue[i].skin
 		local rotation = self.next_queue[i].orientation
 		if config.side_next then -- next at side
-			drawPiece(next_piece, skin, ruleset.block_offsets[next_piece][rotation], 192, -10+i*48)
+			drawPiece(next_piece, skin, ruleset.block_offsets[next_piece][rotation], 32+self.grid.width*16, -10+i*48)
 		else -- next at top
 			drawPiece(next_piece, skin, ruleset.block_offsets[next_piece][rotation], -16+i*80, -32)
 		end
