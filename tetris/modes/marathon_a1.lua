@@ -189,7 +189,6 @@ function MarathonA1Game:drawGrid()
 end
 
 function MarathonA1Game:drawScoringInfo()
-	MarathonA1Game.super.drawScoringInfo(self)
 	love.graphics.setColor(1, 1, 1, 1)
 
 	love.graphics.setFont(font_3x5_2)
@@ -198,30 +197,39 @@ function MarathonA1Game:drawScoringInfo()
 		self.das.frames .. " " ..
 		strTrueValues(self.prev_inputs)
 	)
-	love.graphics.printf("NEXT", 64, 40, 40, "left")
-	love.graphics.printf("GRADE", 240, 120, 40, "left")
-	love.graphics.printf("SCORE", 240, 200, 40, "left")
-	love.graphics.printf("NEXT RANK", 240, 260, 90, "left")
-	love.graphics.printf("LEVEL", 240, 320, 40, "left")
+
+	if config["side_next"] then
+		love.graphics.printf("NEXT", 240, 72, 40, "left")
+	else
+		love.graphics.printf("NEXT", 64, 40, 40, "left")
+	end
+
+	local text_x = config["side_next"] and 316 or 240
+	
+	love.graphics.setFont(font_3x5_2)
+	love.graphics.printf("GRADE", text_x, 120, 40, "left")
+	love.graphics.printf("SCORE", text_x, 200, 40, "left")
+	love.graphics.printf("NEXT RANK", text_x, 260, 90, "left")
+	love.graphics.printf("LEVEL", text_x, 320, 40, "left")
 	local sg = self.grid:checkSecretGrade()
 	if sg >= 5 then 
-		love.graphics.printf("SECRET GRADE", 240, 430, 180, "left")
+		love.graphics.printf("SECRET GRADE", text_x, 430, 180, "left")
 	end
 
 	if self.bravos > 0 then love.graphics.printf("BRAVO", 300, 120, 40, "left") end
 
 	love.graphics.setFont(font_3x5_3)
-	love.graphics.printf(self.score, 240, 220, 90, "left")
+	love.graphics.printf(self.score, text_x, 220, 90, "left")
 	if self.gm_conditions["level300"] and self.gm_conditions["level500"] and self.gm_conditions["level999"] then
-		love.graphics.printf("GM", 240, 140, 90, "left")
+		love.graphics.printf("GM", text_x, 140, 90, "left")
 	else
-		love.graphics.printf(getRankForScore(self.score).rank, 240, 140, 90, "left")
+		love.graphics.printf(getRankForScore(self.score).rank, text_x, 140, 90, "left")
 	end
-	love.graphics.printf(getRankForScore(self.score).next, 240, 280, 90, "left")
-	love.graphics.printf(self.level, 240, 340, 40, "right")
-	love.graphics.printf(self:getSectionEndLevel(), 240, 370, 40, "right")
+	love.graphics.printf(getRankForScore(self.score).next, text_x, 280, 90, "left")
+	love.graphics.printf(self.level, text_x, 340, 40, "right")
+	love.graphics.printf(self:getSectionEndLevel(), text_x, 370, 40, "right")
 	if sg >= 5 then
-		love.graphics.printf(self.SGnames[sg], 240, 450, 180, "left")
+		love.graphics.printf(self.SGnames[sg], text_x, 450, 180, "left")
 	end
 	if self.bravos > 0 then love.graphics.printf(self.bravos, 300, 140, 40, "left") end
 	

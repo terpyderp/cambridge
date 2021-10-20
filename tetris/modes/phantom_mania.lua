@@ -176,9 +176,14 @@ local function getLetterGrade(level, clear)
 end
 
 function PhantomManiaGame:drawScoringInfo()
-	PhantomManiaGame.super.drawScoringInfo(self)
+	
+	if config["side_next"] then
+		love.graphics.printf("NEXT", 240, 72, 40, "left")
+	else
+		love.graphics.printf("NEXT", 64, 40, 40, "left")
+	end
 
-	local text_x = config["side_next"] and 320 or 240
+	local text_x = config["side_next"] and 316 or 240
 
 	love.graphics.setFont(font_3x5_2)
 	if getLetterGrade(self.level, self.clear) ~= "" then

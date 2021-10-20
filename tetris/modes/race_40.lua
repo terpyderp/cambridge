@@ -122,13 +122,19 @@ function Race40Game:getSecretGrade(sg)
 end
 
 function Race40Game:drawScoringInfo()
-	Race40Game.super.drawScoringInfo(self)
+	-- Race40Game.super.drawScoringInfo(self)
 	love.graphics.setColor(1, 1, 1, 1)
 
-	local text_x = config["side_next"] and 320 or 240
+	if config["side_next"] then
+		love.graphics.printf("NEXT", 240, 72, 40, "left")
+	else
+		love.graphics.printf("NEXT", 64, 40, 40, "left")
+	end
+
+	local text_x = config["side_next"] and 316 or 240
 	
 	love.graphics.setFont(font_3x5_2)
-	love.graphics.printf("NEXT", 64, 40, 40, "left")
+	-- love.graphics.printf("NEXT", 64, 40, 40, "left")
 	love.graphics.printf("LINES", text_x, 320, 40, "left")
 	love.graphics.printf("line/min", text_x, 160, 80, "left")
 	love.graphics.printf("piece/sec", text_x, 220, 80, "left")
@@ -141,8 +147,8 @@ function Race40Game:drawScoringInfo()
 	love.graphics.printf(string.format("%.02f", self.lines / math.max(1, self.frames) * 3600), text_x, 180, 80, "left")
 	love.graphics.printf(string.format("%.04f", self.pieces / math.max(1, self.frames) * 60), text_x, 240, 80, "left")
 	if sg >= 7 or self.upstacked then
-			love.graphics.printf(self:getSecretGrade(sg), 240, 450, 180, "left")
-		end
+		love.graphics.printf(self:getSecretGrade(sg), 240, 450, 180, "left")
+	end
 
 	love.graphics.setFont(font_3x5_4)
 	love.graphics.printf(math.max(0, self.line_goal - self.lines), text_x, 340, 40, "left")

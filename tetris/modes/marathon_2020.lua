@@ -439,11 +439,16 @@ function Marathon2020Game:sectionColourFunction(section)
 end
 
 function Marathon2020Game:drawScoringInfo()
-	Marathon2020Game.super.drawScoringInfo(self)
-
 	local current_section = getSectionForLevel(self.level)
-	local text_x = config["side_next"] and 320 or 240
+	
+	if config["side_next"] then
+		love.graphics.printf("NEXT", 240, 72, 40, "left")
+	else
+		love.graphics.printf("NEXT", 64, 40, 40, "left")
+	end
 
+	local text_x = config["side_next"] and 316 or 240
+	
 	love.graphics.setFont(font_3x5_2)
 	love.graphics.printf("GRADE", text_x, 100, 40, "left")
 	love.graphics.printf("GRADE PTS.", text_x, 200, 90, "left")

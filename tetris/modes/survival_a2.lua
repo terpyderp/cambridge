@@ -138,7 +138,13 @@ function SurvivalA2Game:drawScoringInfo()
 	SurvivalA2Game.super.drawScoringInfo(self)
 	love.graphics.setColor(1, 1, 1, 1)
 
-	local text_x = config["side_next"] and 320 or 240
+	if config["side_next"] then
+		love.graphics.printf("NEXT", 240, 72, 40, "left")
+	else
+		love.graphics.printf("NEXT", 64, 40, 40, "left")
+	end
+
+	local text_x = config["side_next"] and 316 or 240
 	
 	love.graphics.setFont(font_3x5_2)
 	love.graphics.print(
@@ -146,7 +152,6 @@ function SurvivalA2Game:drawScoringInfo()
 		self.das.frames .. " " ..
 		strTrueValues(self.prev_inputs)
 	)
-	love.graphics.printf("NEXT", 64, 40, 40, "left")
 	if self:getLetterGrade() ~= "" then love.graphics.printf("GRADE", text_x, 120, 40, "left") end
 	love.graphics.printf("SCORE", text_x, 200, 40, "left")
 	love.graphics.printf("LEVEL", text_x, 320, 40, "left")
